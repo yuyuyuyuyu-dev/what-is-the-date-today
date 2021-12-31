@@ -9,6 +9,10 @@ license that can be found in the LICENSE file.
 <head>
 	<meta charset="utf-8">
     <link href="styles/style.css" rel="stylesheet">
+    <script>
+        let mainLoaded = false;
+        let wasmLoaded = false;
+    </script>
     <script src="scripts/main.js" defer></script>
 	<title>今日の日付</title>
 </head>
@@ -33,9 +37,13 @@ license that can be found in the LICENSE file.
 		WebAssembly.instantiateStreaming(fetch("go/main.wasm"), go.importObject).then((result) => {
 			mod = result.module;
 			inst = result.instance;
-			document.getElementById("runButton").disabled = false;
 
             run();
+            wasmLoaded = true;
+
+            if (mainLoaded == wasmLoaded) {
+                main();
+            }
 		}).catch((err) => {
 			console.error(err);
 		});
@@ -46,8 +54,7 @@ license that can be found in the LICENSE file.
 		}
 	</script>
 
-    <p>Hello, World!</p>
-	<button onClick="run();" id="runButton" disabled>Run</button>
+    <p id="date"></p>
 </body>
 
 </html>
