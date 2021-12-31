@@ -7,7 +7,7 @@ license that can be found in the LICENSE file.
 <html lang="ja">
 
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="styles/style.css" rel="stylesheet">
     <script>
@@ -15,29 +15,29 @@ license that can be found in the LICENSE file.
         let wasmLoaded = false;
     </script>
     <script src="scripts/main.js" defer></script>
-	<title>今日の日付</title>
+    <title>今日の日付</title>
 </head>
 
 <body>
-	<!--
-	Add the following polyfill for Microsoft Edge 17/18 support:
-	<script src="https://cdn.jsdelivr.net/npm/text-encoding@0.7.0/lib/encoding.min.js"></script>
-	(see https://caniuse.com/#feat=textencoder)
-	-->
-	<script src="scripts/wasm_exec.js"></script>
-	<script>
-		if (!WebAssembly.instantiateStreaming) { // polyfill
-			WebAssembly.instantiateStreaming = async (resp, importObject) => {
-				const source = await (await resp).arrayBuffer();
-				return await WebAssembly.instantiate(source, importObject);
-			};
-		}
+    <!--
+    Add the following polyfill for Microsoft Edge 17/18 support:
+    <script src="https://cdn.jsdelivr.net/npm/text-encoding@0.7.0/lib/encoding.min.js"></script>
+    (see https://caniuse.com/#feat=textencoder)
+    -->
+    <script src="scripts/wasm_exec.js"></script>
+    <script>
+        if (!WebAssembly.instantiateStreaming) { // polyfill
+            WebAssembly.instantiateStreaming = async (resp, importObject) => {
+                const source = await (await resp).arrayBuffer();
+                return await WebAssembly.instantiate(source, importObject);
+            };
+        }
 
-		const go = new Go();
-		let mod, inst;
-		WebAssembly.instantiateStreaming(fetch("go/main.wasm"), go.importObject).then((result) => {
-			mod = result.module;
-			inst = result.instance;
+        const go = new Go();
+        let mod, inst;
+        WebAssembly.instantiateStreaming(fetch("go/main.wasm"), go.importObject).then((result) => {
+            mod = result.module;
+            inst = result.instance;
 
             run();
             wasmLoaded = true;
@@ -45,15 +45,15 @@ license that can be found in the LICENSE file.
             if (mainLoaded == wasmLoaded) {
                 main();
             }
-		}).catch((err) => {
-			console.error(err);
-		});
+        }).catch((err) => {
+            console.error(err);
+        });
 
-		async function run() {
-			await go.run(inst);
-			inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
-		}
-	</script>
+        async function run() {
+            await go.run(inst);
+            inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
+        }
+    </script>
 
     <p id="date"></p>
 </body>
