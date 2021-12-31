@@ -24,3 +24,16 @@ h1 {
 
     margin-top: 35px;
 }
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+
+    padding-left: 5px;
+}
+
+
+a {
+    color: #1565c0;
+}
