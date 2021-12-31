@@ -1,4 +1,7 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+}
 #date {
-    color: red;
-    /* font-size: 200%; */
+    font-size: min(5.9vw, 40px);
 }
