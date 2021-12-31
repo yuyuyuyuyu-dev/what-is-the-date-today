@@ -1,7 +1,26 @@
 body {
     font-family: sans-serif;
-    text-align: center;
+
+    margin: 0px;
 }
+
+
+header {
+    padding: 11px;
+    padding-right: auto;
+
+    background-color: #bbdefb;
+}
+
+
+h1 {
+    margin: 0px;
+}
+
+
 #date {
-    font-size: min(5.9vw, 40px);
+    text-align: center;
+    font-size: min(5vw, 40px);
+
+    margin-top: 35px;
 }
