@@ -1,5 +1,5 @@
 body {
-    font-family: sans-serif;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
 
     margin: 0px;
 }
@@ -20,17 +20,18 @@ h1 {
 
 #date {
     text-align: center;
-    font-size: min(5vw, 40px);
+    font-size: min(6vw, 40px);
+    font-weight: 500;
 
     margin-top: 35px;
 }
 
 
 footer {
+    padding-left: 5px;
+
     position: absolute;
     bottom: 0;
-
-    padding-left: 5px;
 }
 
 
