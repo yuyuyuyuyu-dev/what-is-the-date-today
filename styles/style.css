@@ -23,7 +23,13 @@ h1 {
     font-size: min(6vw, 40px);
     font-weight: 500;
 
-    margin-top: 35px;
+    /* 表示を画面中央にする */
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }
 
 
