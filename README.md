@@ -2,7 +2,9 @@
 現在の日付を表示するだけのWEBサイトです
 
 ## スクリーンショット
-<img src='https://raw.githubusercontent.com/yu-ko-ba/what-is-the-date-today/main/screenshot.png' width=75%>
+<div align='center'>
+  <img src='https://raw.githubusercontent.com/yu-ko-ba/what-is-the-date-today/main/screenshot.png' width=75%>
+</div>
 
 ## リンク
 https://yu-ko-ba.github.io/what-is-the-date-today
