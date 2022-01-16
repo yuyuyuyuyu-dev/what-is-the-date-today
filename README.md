@@ -1,4 +1,4 @@
-# what-is-the-date-today
+# 今日の日付
 
 ![screenshot](https://raw.githubusercontent.com/yu-ko-ba/what-is-the-date-today/main/screenshot.png)
 
@@ -8,4 +8,4 @@
 https://yu-ko-ba.github.io/what-is-the-date-today
 
 ## LICENCE
-MIT
+[MIT](https://raw.githubusercontent.com/yu-ko-ba/what-is-the-date-today/main/LICENSE)
