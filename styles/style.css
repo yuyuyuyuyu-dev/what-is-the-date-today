@@ -1,5 +1,12 @@
+@font-face {
+    font-family: 'Nyashi';
+    src: url('fonts/Nyashi.woff2') format('woff2'),
+        url('fonts/Nyashi.ttf') format('truetype');
+}
+
+
 body {
-    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-family: 'Nyashi', 'M PLUS Rounded 1c', sans-serif;
 
     margin: 0px;
 }
