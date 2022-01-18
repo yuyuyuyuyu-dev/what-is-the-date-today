@@ -7,6 +7,8 @@ self.addEventListener('install', (e) => {
         '/what-is-the-date-today/scripts/main.js',
         '/what-is-the-date-today/scripts/wasm_exec.js',
         '/what-is-the-date-today/go/main.wasm',
+        '/what-is-the-date-today/styles/fonts/Nyashi.woff2',
+        '/what-is-the-date-today/styles/fonts/Jiyucho.woff2',
     ])),
   );
 });
