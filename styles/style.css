@@ -47,10 +47,11 @@ h1 {
 
 
 footer {
-    padding-left: 5px;
+    padding-left: 2px;
+    padding-bottom: env(safe-area-inset-bottom);
 
     position: absolute;
-    bottom: 0;
+    bottom: 1px;
 }
 
 
