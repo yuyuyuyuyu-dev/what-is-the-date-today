@@ -17,9 +17,9 @@ fetch('scripts/wasm/wasm_exec.js').then(r => r.text()).then(t => eval(t)).then((
         inst = result.instance;
 
         run();
-        wasmLoaded = true;
 
-        if (mainLoaded == wasmLoaded) {
+        wasmLoaded = true;
+        if (mainLoaded && wasmLoaded) {
             main();
         }
     }).catch((err) => {

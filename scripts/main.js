@@ -13,6 +13,6 @@ function main() {
 
 
 mainLoaded = true;
-if (mainLoaded == wasmLoaded) {
+if (mainLoaded && wasmLoaded) {
     main();
 }
