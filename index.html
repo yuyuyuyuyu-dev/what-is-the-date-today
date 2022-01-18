@@ -1,11 +1,6 @@
 <!doctype html>
-<!--
-Copyright 2018 The Go Authors. All rights reserved.
-Use of this source code is governed by a BSD-style
-license that can be found in the LICENSE file.
--->
-<html lang="ja">
 
+<html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -17,54 +12,19 @@ license that can be found in the LICENSE file.
         let mainLoaded = false;
         let wasmLoaded = false;
     </script>
+    <script src="scripts/wasm/run_wasm.js"></script>
     <script src="scripts/main.js" defer></script>
     <title>今日の日付</title>
 </head>
 
 <body>
-    <!--
-    Add the following polyfill for Microsoft Edge 17/18 support:
-    <script src="https://cdn.jsdelivr.net/npm/text-encoding@0.7.0/lib/encoding.min.js"></script>
-    (see https://caniuse.com/#feat=textencoder)
-    -->
-    <script src="scripts/wasm_exec.js"></script>
-    <script>
-        if (!WebAssembly.instantiateStreaming) { // polyfill
-            WebAssembly.instantiateStreaming = async (resp, importObject) => {
-                const source = await (await resp).arrayBuffer();
-                return await WebAssembly.instantiate(source, importObject);
-            };
-        }
-
-        const go = new Go();
-        let mod, inst;
-        WebAssembly.instantiateStreaming(fetch("go/main.wasm"), go.importObject).then((result) => {
-            mod = result.module;
-            inst = result.instance;
-
-            run();
-            wasmLoaded = true;
-
-            if (mainLoaded == wasmLoaded) {
-                main();
-            }
-        }).catch((err) => {
-            console.error(err);
-        });
-
-        async function run() {
-            await go.run(inst);
-            inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
-        }
-    </script>
-
     <header>
         <h1>今日の日付</h1>
     </header>
     <p id="date">読み込み中...</p>
 </body>
+
 <footer>
     <small><a href="https://github.com/yu-ko-ba/what-is-the-date-today" target="_blank" rel="noopener noreferrer">ソースコード</a></small>
 </footer>
-
 </html>
