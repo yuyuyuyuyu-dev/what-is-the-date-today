@@ -21,4 +21,5 @@ https://yu-ko-ba.github.io/what-is-the-date-today
 ### 作者様ホームページ
 * [よく飛ばない鳥](http://marusexijaxs.web.fc2.com)
 ### ダウンロードリンク
-* https://marusexijaxs.web.fc2.com/tegakifont.html
+* [にゃしぃフォント改二](https://marusexijaxs.web.fc2.com/tegakifont.html#tegakifont4)
+* [じゆうちょうフォント](https://marusexijaxs.web.fc2.com/tegakifont.html#tegakifont3)
