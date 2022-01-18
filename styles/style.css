@@ -1,12 +1,16 @@
 @font-face {
     font-family: 'Nyashi';
-    src: url('fonts/Nyashi.woff2') format('woff2'),
-        url('fonts/Nyashi.ttf') format('truetype');
+    src: url('fonts/Nyashi.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Jiyucho';
+    src: url('fonts/Jiyucho.woff2') format('woff2');
 }
 
 
 body {
-    font-family: 'Nyashi', 'M PLUS Rounded 1c', sans-serif;
+    font-family: 'Nyashi', sans-serif;
 
     margin: 0px;
 }
@@ -22,13 +26,15 @@ header {
 
 h1 {
     margin: 0px;
+
+    font-family: 'Jiyucho', sans-serif;
+    font-weight: normal;
 }
 
 
 #date {
     text-align: center;
     font-size: min(6vw, 40px);
-    font-weight: 500;
 
     /* 表示を画面中央にする */
     width: 100%;
