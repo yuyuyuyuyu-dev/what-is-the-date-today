@@ -1,5 +1,5 @@
 {
-    "background_color": "#bbdefb",
+    "background_color": "#ffffff",
     "description": "現在の日付を表示するWebアプリ",
     "display": "standalone",
     "icons": [
