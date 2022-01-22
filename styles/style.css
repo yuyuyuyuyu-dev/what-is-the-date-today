@@ -11,6 +11,7 @@
 
 body {
     font-family: 'Nyashi', sans-serif;
+    font-weight: bold;
 
     margin: 0px;
 }
@@ -34,7 +35,7 @@ h1 {
 
 #date {
     text-align: center;
-    font-size: min(6vw, 40px);
+    font-size: min(5.9vw, 40px);
 
     /* 表示を画面中央にする */
     width: 100%;
