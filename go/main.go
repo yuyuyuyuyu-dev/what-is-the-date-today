@@ -38,7 +38,7 @@ func getDate(js.Value, []js.Value) interface{} {
 
     // 曜日を追加する
     dayOfWeek := []string{"日", "月", "火", "水", "木", "金", "土"}
-    arr = append(arr, "\n " + dayOfWeek[now.Weekday()] + "曜日")
+    arr = append(arr, "\n" + dayOfWeek[now.Weekday()] + "曜日")
 
     return strings.Join(arr, "")
 }
