@@ -33,8 +33,10 @@ h1 {
 
 
 #date {
+    font-family: "Nyashi", sans-serif;
     text-align: center;
-    font-size: min(6vw, 40px);
+    font-size: min(8vw, 50px);
+    line-height: 1.5;
 
     /* 表示を画面中央にする */
     width: 100%;
