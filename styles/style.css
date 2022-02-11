@@ -9,10 +9,11 @@
 }
 
 
-body {
+* {
     font-family: 'Nyashi', sans-serif;
 
-    margin: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -25,15 +26,12 @@ header {
 
 
 h1 {
-    margin: 0px;
-
     font-family: 'Jiyucho', sans-serif;
     font-weight: normal;
 }
 
 
 #date {
-    font-family: "Nyashi", sans-serif;
     text-align: center;
     font-size: min(8vw, 50px);
     line-height: 1.5;
