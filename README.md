@@ -1,4 +1,6 @@
 # 今日の日付
+[![Deploy](https://github.com/yuyuyuyuyu-dev/what-is-the-date-today/actions/workflows/deploy.yml/badge.svg)](https://github.com/yuyuyuyuyu-dev/what-is-the-date-today/actions/workflows/deploy.yml)
+
 現在の日付を表示するだけのWebアプリです<br />
 健康診断の問診票など、その日の日付を西暦・和暦から書くときに便利です
 
