@@ -51,6 +51,7 @@ kotlin {
             implementation(libs.koin.compose.viewmodel.navigation)
             implementation(libs.circuit)
             implementation(libs.aboutlibraries.compose.m3)
+            implementation(libs.kotlinx.datetime)
 
             implementation(libs.yuyuyuyuyu.myMaterialTheme)
             implementation(libs.yuyuyuyuyu.simpleTopAppBar)

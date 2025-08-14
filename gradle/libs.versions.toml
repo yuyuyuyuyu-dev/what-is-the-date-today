@@ -8,6 +8,7 @@ kotlinx-coroutines = "1.10.2"
 koin = "4.1.0"
 circuit = "0.30.0"
 aboutLibraries = "12.2.4"
+datetime = "0.7.1"
 
 myMaterialTheme = "0.3.0"
 simpleTopAppBar = "0.3.1"
@@ -24,6 +25,7 @@ koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmo
 koin-compose-viewmodel-navigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation" }
 circuit = { group = "com.slack.circuit", name = "circuit-foundation", version.ref = "circuit" }
 aboutlibraries-compose-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
 
 yuyuyuyuyu-myMaterialTheme = { group = "dev.yuyuyuyuyu", name = "mymaterialtheme", version.ref = "myMaterialTheme" }
 yuyuyuyuyu-simpleTopAppBar = { group = "dev.yuyuyuyuyu", name = "simpletopappbar", version.ref = "simpleTopAppBar" }

@@ -11,6 +11,7 @@ import com.slack.circuit.foundation.NavigableCircuitContent
 import com.slack.circuit.foundation.rememberCircuitNavigator
 import dev.yuyuyuyuyu.mymaterialtheme.MyMaterialTheme
 import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
+import dev.yuyuyuyuyu.whatisthedatetoday.di.dataModule
 import dev.yuyuyuyuyu.whatisthedatetoday.di.uiModule
 import dev.yuyuyuyuyu.whatisthedatetoday.ui.openSourceLicenseList.OpenSourceLicenseListScreen
 import dev.yuyuyuyuyu.whatisthedatetoday.ui.whatIsTheDateToday.WhatIsTheDateTodayScreen
@@ -34,7 +35,7 @@ fun WhatIsTheDateTodayApp() {
     KoinApplication(
         application = {
             printLogger()
-            modules(uiModule)
+            modules(uiModule, dataModule)
         },
     ) {
         MyMaterialTheme {
