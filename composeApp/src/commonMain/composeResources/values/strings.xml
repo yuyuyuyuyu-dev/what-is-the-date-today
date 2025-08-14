@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">What is the date today</string>
+    <string name="open_source_licenses">Open source licenses</string>
+    <string name="date_format">(%2$s %3$d) %1$d/%4$s/%5$s\n%6$s</string>
+    <string name="reiwa">Reiwa</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+</resources>
