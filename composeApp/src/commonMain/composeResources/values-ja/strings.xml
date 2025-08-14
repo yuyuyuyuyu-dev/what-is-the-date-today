@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">今日の日付</string>
     <string name="open_source_licenses">オープンソース ライセンス</string>
+    <string name="date_format">（%2$s%3$d年）%1$d年%4$s月%5$s日\n%6$s</string>
     <string name="reiwa">令和</string>
     <string name="monday">月曜日</string>
     <string name="tuesday">火曜日</string>

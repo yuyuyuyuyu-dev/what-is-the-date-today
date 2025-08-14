@@ -14,14 +14,16 @@ val uiModule = module {
         Circuit.Builder()
 
             .addPresenter<WhatIsTheDateTodayScreen, WhatIsTheDateTodayScreen.State>(
-                WhatIsTheDateTodayPresenter()
+                WhatIsTheDateTodayPresenter(
+                    currentDateRepository = get(),
+                ),
             )
             .addUi<WhatIsTheDateTodayScreen, WhatIsTheDateTodayScreen.State> { state, navigator ->
                 WhatIsTheDateToday(state, navigator)
             }
 
             .addPresenter<OpenSourceLicenseListScreen, OpenSourceLicenseListScreen.State>(
-                OpenSourceLicenseListPresenter()
+                OpenSourceLicenseListPresenter(),
             )
             .addUi<OpenSourceLicenseListScreen, OpenSourceLicenseListScreen.State> { _, modifier ->
                 OpenSourceLicenseList(modifier)
