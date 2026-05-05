@@ -9,12 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
+import dev.yuyuyuyuyu.whatisthedatetoday.di.AppComponent
 import org.jetbrains.compose.resources.stringResource
 import whatisthedatetoday.composeapp.generated.resources.Res
 import whatisthedatetoday.composeapp.generated.resources.app_name
 import whatisthedatetoday.composeapp.generated.resources.open_source_licenses
-
-import dev.yuyuyuyuyu.whatisthedatetoday.di.AppComponent
 
 @Composable
 fun MainScreen(appComponent: AppComponent) {
@@ -41,7 +40,7 @@ fun MainScreen(appComponent: AppComponent) {
                     }
                 },
                 onSourceCodeButtonClick = {
-                    uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/how-old-am-i")
+                    uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/what-is-the-date-today")
                 },
             )
         },
