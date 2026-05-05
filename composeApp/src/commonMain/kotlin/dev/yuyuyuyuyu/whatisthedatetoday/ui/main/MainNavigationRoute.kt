@@ -5,9 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed interface MainNavigationRoute : NavKey {
-    @Serializable
-    data object WhatIsTheDateToday : MainNavigationRoute
+    @Serializable data object WhatIsTheDateToday : MainNavigationRoute
 
-    @Serializable
-    data object OpenSourceLicenses : MainNavigationRoute
+    @Serializable data object OpenSourceLicenses : MainNavigationRoute
 }

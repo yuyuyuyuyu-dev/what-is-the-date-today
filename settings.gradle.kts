@@ -1,4 +1,5 @@
 rootProject.name = "WhatIsTheDateToday"
+
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

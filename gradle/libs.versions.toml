@@ -24,6 +24,7 @@ compose-multiplatform-lifecycle = "2.10.0"
 multiplatform-nav3-ui = "1.1.0"
 kotlinxSerialization = "1.11.0"
 composePwa = "0.6.1"
+spotless = "6.25.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -64,3 +65,4 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 aboutLibraries = { id = "com.mikepenz.aboutlibraries.plugin", version.ref = "aboutLibraries" }
 composePwa = { id = "dev.yuyuyuyuyu.composepwa", version.ref = "composePwa" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

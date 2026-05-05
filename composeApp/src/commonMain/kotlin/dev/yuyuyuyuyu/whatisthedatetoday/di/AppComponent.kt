@@ -20,5 +20,7 @@ abstract class AppComponent {
     fun provideCurrentDateRepository(impl: CurrentDateRepositoryImpl): CurrentDateRepository = impl
 
     @Provides
-    fun provideWhatIsTheDateTodayViewModel(impl: WhatIsTheDateTodayViewModelImpl): WhatIsTheDateTodayViewModel = impl
+    fun provideWhatIsTheDateTodayViewModel(
+        impl: WhatIsTheDateTodayViewModelImpl
+    ): WhatIsTheDateTodayViewModel = impl
 }

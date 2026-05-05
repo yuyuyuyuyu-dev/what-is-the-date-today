@@ -29,7 +29,8 @@ fun MainScreen(appComponent: AppComponent) {
             SimpleTopAppBar(
                 title =
                     when (backStack.lastOrNull()) {
-                        is MainNavigationRoute.OpenSourceLicenses -> stringResource(Res.string.open_source_licenses)
+                        is MainNavigationRoute.OpenSourceLicenses ->
+                            stringResource(Res.string.open_source_licenses)
                         else -> stringResource(Res.string.app_name)
                     },
                 navigateBackIsPossible = backStack.size > 1,
