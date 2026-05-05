@@ -7,9 +7,12 @@ import androidx.navigation3.ui.NavDisplay
 import dev.yuyuyuyuyu.whatisthedatetoday.ui.openSourceLicenses.OpenSourceLicensesScreen
 import dev.yuyuyuyuyu.whatisthedatetoday.ui.whatIsTheDateToday.WhatIsTheDateTodayScreen
 
+import dev.yuyuyuyuyu.whatisthedatetoday.di.AppComponent
+
 @Composable
 fun MainNavigation(
     backStack: MutableList<MainNavigationRoute>,
+    appComponent: AppComponent,
     modifier: Modifier = Modifier,
 ) {
     NavDisplay(
@@ -20,7 +23,7 @@ fun MainNavigation(
             when (key) {
                 MainNavigationRoute.WhatIsTheDateToday -> {
                     NavEntry(key) {
-                        WhatIsTheDateTodayScreen()
+                        WhatIsTheDateTodayScreen(viewModel = appComponent.whatIsTheDateTodayViewModel)
                     }
                 }
 

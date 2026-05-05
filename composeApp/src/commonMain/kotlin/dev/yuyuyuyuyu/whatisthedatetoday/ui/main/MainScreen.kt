@@ -14,8 +14,10 @@ import whatisthedatetoday.composeapp.generated.resources.Res
 import whatisthedatetoday.composeapp.generated.resources.app_name
 import whatisthedatetoday.composeapp.generated.resources.open_source_licenses
 
+import dev.yuyuyuyuyu.whatisthedatetoday.di.AppComponent
+
 @Composable
-fun MainScreen() {
+fun MainScreen(appComponent: AppComponent) {
     val backStack: MutableList<MainNavigationRoute> =
         rememberSerializable(serializer = SnapshotStateListSerializer()) {
             mutableStateListOf(MainNavigationRoute.WhatIsTheDateToday)
@@ -44,6 +46,6 @@ fun MainScreen() {
             )
         },
     ) { innerPadding ->
-        MainNavigation(backStack, Modifier.padding(innerPadding))
+        MainNavigation(backStack, appComponent, Modifier.padding(innerPadding))
     }
 }

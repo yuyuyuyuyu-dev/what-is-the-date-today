@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.aboutLibraries)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -49,6 +50,7 @@ kotlin {
             implementation(libs.jetbrains.material3.adaptiveNavigation3)
             implementation(libs.jetbrains.lifecycle.viewmodelNavigation3)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlin.inject.runtime)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -85,5 +87,13 @@ android {
 
 dependencies {
     debugImplementation(libs.compose.uiTooling)
+    add("kspCommonMainMetadata", libs.kotlin.inject.compiler)
+    add("kspAndroid", libs.kotlin.inject.compiler)
+    add("kspJs", libs.kotlin.inject.compiler)
+    add("kspWasmJs", libs.kotlin.inject.compiler)
+}
+
+ksp {
+    arg("me.tatarka.inject.dumpSetup", "true")
 }
 

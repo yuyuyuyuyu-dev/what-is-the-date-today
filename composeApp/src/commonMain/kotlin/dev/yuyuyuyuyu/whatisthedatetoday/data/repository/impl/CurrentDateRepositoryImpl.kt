@@ -14,7 +14,9 @@ import whatisthedatetoday.composeapp.generated.resources.sunday
 import whatisthedatetoday.composeapp.generated.resources.thursday
 import whatisthedatetoday.composeapp.generated.resources.tuesday
 import whatisthedatetoday.composeapp.generated.resources.wednesday
+import me.tatarka.inject.annotations.Inject
 
+@Inject
 class CurrentDateRepositoryImpl(
     private val currentDateDataSource: CurrentDateDataSource,
 ) : CurrentDateRepository {
