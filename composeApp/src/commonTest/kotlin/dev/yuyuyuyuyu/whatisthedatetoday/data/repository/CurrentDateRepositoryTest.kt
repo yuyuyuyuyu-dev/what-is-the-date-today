@@ -1,6 +1,6 @@
 package dev.yuyuyuyuyu.whatisthedatetoday.data.repository
 
-import dev.yuyuyuyuyu.whatisthedatetoday.data.dataSource.fake.FakeCurrentDateDataSource
+import dev.yuyuyuyuyu.whatisthedatetoday.data.source.fake.FakeCurrentDateDataSource
 import dev.yuyuyuyuyu.whatisthedatetoday.data.model.Date
 import dev.yuyuyuyuyu.whatisthedatetoday.data.repository.impl.CurrentDateRepositoryImpl
 import whatisthedatetoday.composeapp.generated.resources.Res
