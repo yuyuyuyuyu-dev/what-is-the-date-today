@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.aboutLibraries)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.composePwa)
 }
 
 kotlin {
