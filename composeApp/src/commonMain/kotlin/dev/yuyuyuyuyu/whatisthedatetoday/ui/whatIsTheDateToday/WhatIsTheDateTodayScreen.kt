@@ -26,15 +26,16 @@ fun WhatIsTheDateTodayScreen(
         contentAlignment = Alignment.Center,
     ) {
         Text(
-            text = stringResource(
-                Res.string.date_format,
-                uiState.year,
-                uiState.japaneseEra,
-                uiState.japaneseYear,
-                uiState.month.toString().padStart(2, '0'),
-                uiState.day.toString().padStart(2, '0'),
-                uiState.dayOfWeek,
-            ),
+            text =
+                stringResource(
+                    Res.string.date_format,
+                    uiState.year,
+                    uiState.japaneseEra,
+                    uiState.japaneseYear,
+                    uiState.month.toString().padStart(2, '0'),
+                    uiState.day.toString().padStart(2, '0'),
+                    uiState.dayOfWeek,
+                ),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.headlineMedium,
         )

@@ -5,6 +5,7 @@ import dev.yuyuyuyuyu.whatisthedatetoday.data.model.Date
 import dev.yuyuyuyuyu.whatisthedatetoday.data.repository.CurrentDateRepository
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.number
+import me.tatarka.inject.annotations.Inject
 import whatisthedatetoday.composeapp.generated.resources.Res
 import whatisthedatetoday.composeapp.generated.resources.friday
 import whatisthedatetoday.composeapp.generated.resources.monday
@@ -14,7 +15,6 @@ import whatisthedatetoday.composeapp.generated.resources.sunday
 import whatisthedatetoday.composeapp.generated.resources.thursday
 import whatisthedatetoday.composeapp.generated.resources.tuesday
 import whatisthedatetoday.composeapp.generated.resources.wednesday
-import me.tatarka.inject.annotations.Inject
 
 @Inject
 class CurrentDateRepositoryImpl(
@@ -29,15 +29,16 @@ class CurrentDateRepositoryImpl(
             japaneseYear = today.year - 2018,
             month = today.month.number,
             day = today.day,
-            dayOfWeek = when (today.dayOfWeek) {
-                DayOfWeek.MONDAY -> Res.string.monday
-                DayOfWeek.TUESDAY -> Res.string.tuesday
-                DayOfWeek.WEDNESDAY -> Res.string.wednesday
-                DayOfWeek.THURSDAY -> Res.string.thursday
-                DayOfWeek.FRIDAY -> Res.string.friday
-                DayOfWeek.SATURDAY -> Res.string.saturday
-                DayOfWeek.SUNDAY -> Res.string.sunday
-            },
+            dayOfWeek =
+                when (today.dayOfWeek) {
+                    DayOfWeek.MONDAY -> Res.string.monday
+                    DayOfWeek.TUESDAY -> Res.string.tuesday
+                    DayOfWeek.WEDNESDAY -> Res.string.wednesday
+                    DayOfWeek.THURSDAY -> Res.string.thursday
+                    DayOfWeek.FRIDAY -> Res.string.friday
+                    DayOfWeek.SATURDAY -> Res.string.saturday
+                    DayOfWeek.SUNDAY -> Res.string.sunday
+                },
         )
     }
 }
