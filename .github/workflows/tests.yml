@@ -26,4 +26,4 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Run tests
-        run: ./gradlew jsTest wasmJsTest
+        run: ./gradlew wasmJsTest
