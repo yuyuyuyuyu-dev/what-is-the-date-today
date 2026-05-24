@@ -25,16 +25,19 @@ fun WhatIsTheDateTodayScreen(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
+        val japaneseEraStr = uiState.japaneseEra?.let { stringResource(it) } ?: ""
+        val dayOfWeekStr = uiState.dayOfWeek?.let { stringResource(it) } ?: ""
+        
         Text(
             text =
                 stringResource(
                     Res.string.date_format,
                     uiState.year,
-                    uiState.japaneseEra,
+                    japaneseEraStr,
                     uiState.japaneseYear,
                     uiState.month.toString().padStart(2, '0'),
                     uiState.day.toString().padStart(2, '0'),
-                    uiState.dayOfWeek,
+                    dayOfWeekStr,
                 ),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.headlineMedium,

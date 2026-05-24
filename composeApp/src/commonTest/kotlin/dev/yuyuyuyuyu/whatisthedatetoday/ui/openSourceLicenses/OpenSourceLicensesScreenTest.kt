@@ -6,7 +6,7 @@ import kotlin.test.Test
 
 class OpenSourceLicensesScreenTest {
 
-    @OptIn(ExperimentalTestApi::class, kotlin.js.ExperimentalWasmJsInterop::class)
+    @OptIn(ExperimentalTestApi::class)
     @Test
     fun doesNotCrashWhenDisplayed() =
         kotlinx.coroutines.test.runTest {
