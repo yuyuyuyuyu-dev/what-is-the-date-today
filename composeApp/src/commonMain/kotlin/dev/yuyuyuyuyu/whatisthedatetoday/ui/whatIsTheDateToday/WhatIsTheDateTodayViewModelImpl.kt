@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
-import org.jetbrains.compose.resources.getString
 
 @Inject
 class WhatIsTheDateTodayViewModelImpl(
@@ -18,12 +17,12 @@ class WhatIsTheDateTodayViewModelImpl(
     private val _uiState =
         MutableStateFlow(
             WhatIsTheDateTodayUiState(
-                japaneseEra = "",
+                japaneseEra = null,
                 year = 0,
                 japaneseYear = 0,
                 month = 0,
                 day = 0,
-                dayOfWeek = "",
+                dayOfWeek = null,
             )
         )
     override val uiState: StateFlow<WhatIsTheDateTodayUiState> = _uiState.asStateFlow()
@@ -33,12 +32,12 @@ class WhatIsTheDateTodayViewModelImpl(
             val date = currentDateRepository.getCurrentDate()
             _uiState.value =
                 WhatIsTheDateTodayUiState(
-                    japaneseEra = getString(date.japaneseEra),
+                    japaneseEra = date.japaneseEra,
                     year = date.year,
                     japaneseYear = date.japaneseYear,
                     month = date.month,
                     day = date.day,
-                    dayOfWeek = getString(date.dayOfWeek),
+                    dayOfWeek = date.dayOfWeek,
                 )
         }
     }
