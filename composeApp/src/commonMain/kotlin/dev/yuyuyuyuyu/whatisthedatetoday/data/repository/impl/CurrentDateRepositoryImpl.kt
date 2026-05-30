@@ -17,9 +17,8 @@ import whatisthedatetoday.composeapp.generated.resources.tuesday
 import whatisthedatetoday.composeapp.generated.resources.wednesday
 
 @Inject
-class CurrentDateRepositoryImpl(
-    private val currentDateDataSource: CurrentDateDataSource,
-) : CurrentDateRepository {
+class CurrentDateRepositoryImpl(private val currentDateDataSource: CurrentDateDataSource) :
+    CurrentDateRepository {
     override fun getCurrentDate(): Date {
         val today = currentDateDataSource.getCurrentDate()
 

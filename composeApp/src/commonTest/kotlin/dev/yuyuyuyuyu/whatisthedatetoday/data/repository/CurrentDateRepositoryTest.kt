@@ -11,9 +11,7 @@ import whatisthedatetoday.composeapp.generated.resources.thursday
 
 class CurrentDateRepositoryTest {
     private val repository =
-        CurrentDateRepositoryImpl(
-            currentDateDataSource = FakeCurrentDateDataSource(),
-        )
+        CurrentDateRepositoryImpl(currentDateDataSource = FakeCurrentDateDataSource())
 
     @Test
     fun `getCurrentDate() should returns the current Date`() {

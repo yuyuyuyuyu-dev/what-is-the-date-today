@@ -21,13 +21,10 @@ fun WhatIsTheDateTodayScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
+    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         val japaneseEraStr = uiState.japaneseEra?.let { stringResource(it) } ?: ""
         val dayOfWeekStr = uiState.dayOfWeek?.let { stringResource(it) } ?: ""
-        
+
         Text(
             text =
                 stringResource(

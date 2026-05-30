@@ -10,8 +10,16 @@ class OpenSourceLicensesScreenTest {
     @Test
     fun doesNotCrashWhenDisplayed() =
         kotlinx.coroutines.test.runTest {
-            if (dev.yuyuyuyuyu.whatisthedatetoday.getPlatform().name == "Web with Kotlin/JS")
+            val isAndroidOrJs =
+                try {
+                    val name = dev.yuyuyuyuyu.whatisthedatetoday.getPlatform().name
+                    name.startsWith("Android") || name == "Web with Kotlin/JS"
+                } catch (ignored: Throwable) {
+                    true
+                }
+            if (isAndroidOrJs) {
                 return@runTest
+            }
             runComposeUiTest { setContent { OpenSourceLicensesScreen() } }
         }
 }

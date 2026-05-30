@@ -1,0 +1,7 @@
+naming:
+  FunctionNaming:
+    active: true
+    ignoreAnnotated:
+      - 'Composable'
+  MatchingDeclarationName:
+    active: false
