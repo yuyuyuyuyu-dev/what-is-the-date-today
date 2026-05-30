@@ -30,5 +30,16 @@ allprojects {
             targetExclude("**/build/**/*.gradle.kts")
             ktfmt().kotlinlangStyle()
         }
+        format("web") {
+            target("**/*.html", "**/*.css", "**/*.js")
+            targetExclude(
+                "**/build/**",
+                "**/.gradle/**",
+                "**/.kotlin/**",
+                "**/kotlin-js-store/**",
+                "**/node_modules/**",
+            )
+            prettier()
+        }
     }
 }
