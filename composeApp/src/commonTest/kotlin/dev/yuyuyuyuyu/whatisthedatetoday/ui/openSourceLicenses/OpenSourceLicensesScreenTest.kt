@@ -14,7 +14,7 @@ class OpenSourceLicensesScreenTest {
                 try {
                     val name = dev.yuyuyuyuyu.whatisthedatetoday.getPlatform().name
                     name.startsWith("Android") || name == "Web with Kotlin/JS"
-                } catch (e: Throwable) {
+                } catch (ignored: Throwable) {
                     true
                 }
             if (isAndroidOrJs) {

@@ -9,10 +9,12 @@ plugins {
     alias(libs.plugins.kotlinSerialization) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.spotless)
+    alias(libs.plugins.detekt)
 }
 
 allprojects {
     apply(plugin = "com.diffplug.spotless")
+    apply(plugin = "io.gitlab.arturbosch.detekt")
 
     spotless {
         kotlin {
@@ -41,5 +43,11 @@ allprojects {
             )
             prettier()
         }
+    }
+
+    detekt {
+        buildUponDefaultConfig = true
+        source.setFrom(files("src"))
+        config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
     }
 }
