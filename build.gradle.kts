@@ -21,7 +21,7 @@ allprojects {
                 "**/build/**/*.kt",
                 "**/.idea/**/*.kt",
                 "**/bin/**/*.kt",
-                "**/generated/**/*.kt"
+                "**/generated/**/*.kt",
             )
             ktfmt().kotlinlangStyle()
         }

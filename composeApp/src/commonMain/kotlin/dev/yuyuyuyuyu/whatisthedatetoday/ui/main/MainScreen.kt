@@ -44,7 +44,7 @@ fun MainScreen(appComponent: AppComponent) {
                     uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/what-is-the-date-today")
                 },
             )
-        },
+        }
     ) { innerPadding ->
         MainNavigation(backStack, appComponent, Modifier.padding(innerPadding))
     }

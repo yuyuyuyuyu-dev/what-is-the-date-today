@@ -25,5 +25,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      - name: Run tests
-        run: ./gradlew wasmJsTest
+      - name: Check Formatting (Spotless)
+        run: ./gradlew spotlessCheck
+
+      - name: Run Linter (Android Lint)
+        run: ./gradlew lint
+
+      - name: Run Tests
+        run: ./gradlew allTests
