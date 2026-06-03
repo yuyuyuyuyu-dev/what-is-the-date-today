@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -26,7 +27,11 @@ kotlin {
         binaries.executable()
     }
 
+    jvm("desktop")
+
     sourceSets {
+        val desktopMain by getting
+
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
@@ -56,6 +61,10 @@ kotlin {
             implementation(compose.uiTest)
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.11.0")
         }
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+        }
     }
 }
 
@@ -84,6 +93,19 @@ dependencies {
     add("kspAndroid", libs.kotlin.inject.compiler)
     add("kspJs", libs.kotlin.inject.compiler)
     add("kspWasmJs", libs.kotlin.inject.compiler)
+    add("kspDesktop", libs.kotlin.inject.compiler)
 }
 
 ksp { arg("me.tatarka.inject.dumpSetup", "true") }
+
+compose.desktop {
+    application {
+        mainClass = "dev.yuyuyuyuyu.whatisthedatetoday.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "dev.yuyuyuyuyu.whatisthedatetoday"
+            packageVersion = "1.0.0"
+        }
+    }
+}
