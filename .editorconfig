@@ -1,0 +1,14 @@
+root = true
+
+# Only project-specific decisions live here; everything else is left to the
+# ktlint / prettier / editor defaults (the "Android first, defaults for the rest"
+# rule). Add a setting only when there is a concrete reason to deviate.
+[*.{kt,kts}]
+# Base style: Android (ktlint's default is ktlint_official, so this is a real choice).
+ktlint_code_style = android_studio
+# Naming is owned by detekt's FunctionNaming (which exempts @Composable); don't duplicate.
+ktlint_standard_function-naming = disabled
+# Android style guide is silent on trailing commas, so follow Kotlin's official
+# convention (which encourages them). ij_* keys also drive Android Studio's formatter.
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true

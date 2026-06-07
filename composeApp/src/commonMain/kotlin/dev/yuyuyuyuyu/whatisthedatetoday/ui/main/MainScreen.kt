@@ -31,6 +31,7 @@ fun MainScreen(appComponent: AppComponent) {
                     when (backStack.lastOrNull()) {
                         is MainNavigationRoute.OpenSourceLicenses ->
                             stringResource(Res.string.open_source_licenses)
+
                         else -> stringResource(Res.string.app_name)
                     },
                 navigateBackIsPossible = backStack.size > 1,
@@ -44,7 +45,7 @@ fun MainScreen(appComponent: AppComponent) {
                     uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/what-is-the-date-today")
                 },
             )
-        }
+        },
     ) { innerPadding ->
         MainNavigation(backStack, appComponent, Modifier.padding(innerPadding))
     }

@@ -23,10 +23,11 @@ fun MainNavigation(
                 MainNavigationRoute.WhatIsTheDateToday -> {
                     NavEntry(key) {
                         WhatIsTheDateTodayScreen(
-                            viewModel = appComponent.whatIsTheDateTodayViewModel
+                            viewModel = appComponent.whatIsTheDateTodayViewModel,
                         )
                     }
                 }
+
                 MainNavigationRoute.OpenSourceLicenses -> {
                     NavEntry(key) { OpenSourceLicensesScreen() }
                 }
