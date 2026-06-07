@@ -11,7 +11,8 @@ import me.tatarka.inject.annotations.Inject
 
 @Inject
 class WhatIsTheDateTodayViewModelImpl(private val currentDateRepository: CurrentDateRepository) :
-    ViewModel(), WhatIsTheDateTodayViewModel {
+    ViewModel(),
+    WhatIsTheDateTodayViewModel {
 
     private val _uiState =
         MutableStateFlow(
@@ -22,7 +23,7 @@ class WhatIsTheDateTodayViewModelImpl(private val currentDateRepository: Current
                 month = 0,
                 day = 0,
                 dayOfWeek = null,
-            )
+            ),
         )
     override val uiState: StateFlow<WhatIsTheDateTodayUiState> = _uiState.asStateFlow()
 

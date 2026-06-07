@@ -21,6 +21,6 @@ abstract class AppComponent {
 
     @Provides
     fun provideWhatIsTheDateTodayViewModel(
-        impl: WhatIsTheDateTodayViewModelImpl
+        impl: WhatIsTheDateTodayViewModelImpl,
     ): WhatIsTheDateTodayViewModel = impl
 }
