@@ -2,6 +2,6 @@ naming:
   FunctionNaming:
     active: true
     ignoreAnnotated:
-      - 'Composable'
+      - "Composable"
   MatchingDeclarationName:
     active: false
