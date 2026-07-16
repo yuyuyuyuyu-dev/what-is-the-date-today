@@ -22,11 +22,11 @@ kotlinInject = "0.9.0"
 kotlinxCoroutines = "1.11.0"
 kotlinxSerialization = "1.11.0"
 ksp = "2.3.10"
+ktlint = "14.2.0"
 material3 = "1.12.0-alpha02"
 multiplatform-nav3-ui = "1.1.1"
 myMaterialTheme = "0.4.0"
 simpleTopAppBar = "0.4.0"
-spotless = "8.8.0"
 versionCatalogUpdate = "1.1.0"
 
 [libraries]
@@ -70,5 +70,5 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 versionCatalogUpdate = { id = "nl.littlerobots.version-catalog-update", version.ref = "versionCatalogUpdate" }

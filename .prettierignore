@@ -1,0 +1,11 @@
+# Build outputs and tooling caches
+node_modules/
+build/
+.gradle/
+.kotlin/
+.idea/
+kotlin-js-store/
+
+# Generated at build time (aboutLibraries export) and local tooling state
+**/composeResources/
+.claude/

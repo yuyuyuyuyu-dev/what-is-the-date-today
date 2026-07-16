@@ -3,6 +3,7 @@ package dev.yuyuyuyuyu.whatisthedatetoday
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 
-fun main() = application {
-    Window(onCloseRequest = ::exitApplication, title = "What is the date today") { App() }
-}
+fun main() =
+    application {
+        Window(onCloseRequest = ::exitApplication, title = "What is the date today") { App() }
+    }
