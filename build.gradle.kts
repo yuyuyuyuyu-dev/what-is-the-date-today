@@ -20,9 +20,20 @@ allprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "io.gitlab.arturbosch.detekt")
 
-    // ktlint (Kotlin) and Prettier (everything else) are used at their defaults — the
-    // "Fit to Standard" stance. ktlint's style is driven entirely by .editorconfig; Prettier
-    // runs from package.json. Neither needs project-level configuration here.
+    // ktlint (Kotlin) and Prettier (everything else) run at their defaults — the "Fit to
+    // Standard" stance: ktlint's style comes from .editorconfig, Prettier's from package.json.
+    ktlint {
+        val buildDirPath =
+            layout.buildDirectory
+                .get()
+                .asFile.invariantSeparatorsPath
+        filter {
+            // Compose Multiplatform registers its generated resource accessors (under the
+            // build directory) as Kotlin source roots. That code is regenerated on every
+            // build and is not ours to format, so ktlint must skip everything under build/.
+            exclude { element -> element.file.invariantSeparatorsPath.startsWith(buildDirPath) }
+        }
+    }
 
     detekt {
         buildUponDefaultConfig = true
