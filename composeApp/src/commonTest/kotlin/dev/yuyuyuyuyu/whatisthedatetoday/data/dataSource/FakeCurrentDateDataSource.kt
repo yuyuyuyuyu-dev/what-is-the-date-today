@@ -7,6 +7,8 @@ import kotlinx.datetime.LocalDate
  * sociable tests of the higher layers (repository + view model) stay deterministic while exercising
  * the real collaborators.
  */
-class FakeCurrentDateDataSource(private val date: LocalDate) : CurrentDateDataSource {
+class FakeCurrentDateDataSource(
+    private val date: LocalDate,
+) : CurrentDateDataSource {
     override fun getCurrentDate(): LocalDate = date
 }

@@ -10,10 +10,10 @@ import kotlinx.coroutines.launch
 import me.tatarka.inject.annotations.Inject
 
 @Inject
-class WhatIsTheDateTodayViewModelImpl(private val currentDateRepository: CurrentDateRepository) :
-    ViewModel(),
+class WhatIsTheDateTodayViewModelImpl(
+    private val currentDateRepository: CurrentDateRepository,
+) : ViewModel(),
     WhatIsTheDateTodayViewModel {
-
     private val _uiState =
         MutableStateFlow(
             WhatIsTheDateTodayUiState(

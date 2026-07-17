@@ -7,8 +7,8 @@ on:
     branches: ["main"]
 
 jobs:
-  spotless:
-    name: Check Formatting
+  ktlint:
+    name: Check Kotlin Formatting
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,8 +25,29 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
-      - name: Check Formatting (Spotless)
-        run: ./gradlew spotlessCheck
+      - name: Check Kotlin Formatting (ktlint)
+        run: ./gradlew ktlintCheck
+
+  prettier:
+    name: Check Formatting
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Formatting (Prettier)
+        run: npm run format:check
 
   lint:
     name: Run Linter

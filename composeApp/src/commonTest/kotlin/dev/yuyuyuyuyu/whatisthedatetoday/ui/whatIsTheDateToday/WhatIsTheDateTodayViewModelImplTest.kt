@@ -2,10 +2,6 @@ package dev.yuyuyuyuyu.whatisthedatetoday.ui.whatIsTheDateToday
 
 import dev.yuyuyuyuyu.whatisthedatetoday.data.dataSource.FakeCurrentDateDataSource
 import dev.yuyuyuyuyu.whatisthedatetoday.data.repository.impl.CurrentDateRepositoryImpl
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -21,6 +17,10 @@ import whatisthedatetoday.composeapp.generated.resources.sunday
 import whatisthedatetoday.composeapp.generated.resources.thursday
 import whatisthedatetoday.composeapp.generated.resources.tuesday
 import whatisthedatetoday.composeapp.generated.resources.wednesday
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 /**
  * Sociable unit test: the view model is exercised together with its real collaborator
@@ -30,7 +30,6 @@ import whatisthedatetoday.composeapp.generated.resources.wednesday
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 class WhatIsTheDateTodayViewModelImplTest {
-
     @BeforeTest
     fun setUp() {
         // The view model launches its init work on viewModelScope (Dispatchers.Main). The

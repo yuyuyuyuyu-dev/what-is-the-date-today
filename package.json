@@ -1,0 +1,12 @@
+{
+  "name": "what-is-the-date-today",
+  "private": true,
+  "description": "Prettier formatting for the non-Kotlin files in this repository (Kotlin is handled by ktlint).",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "3.9.5"
+  }
+}

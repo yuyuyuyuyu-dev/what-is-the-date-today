@@ -1,11 +1,11 @@
 package dev.yuyuyuyuyu.whatisthedatetoday.data.dataSource.impl
 
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.todayIn
 import kotlin.test.Test
 import kotlin.test.assertTrue
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 
 /**
  * Integration test for the boundary that [FakeCurrentDateDataSource] stands in for elsewhere: it
@@ -14,7 +14,6 @@ import kotlinx.datetime.todayIn
  */
 @OptIn(ExperimentalTime::class)
 class CurrentDateDataSourceImplTest {
-
     @Test
     fun returnsTheSystemCurrentDate() {
         val before = Clock.System.todayIn(TimeZone.currentSystemDefault())
