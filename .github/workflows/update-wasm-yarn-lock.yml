@@ -1,0 +1,84 @@
+name: Update Wasm yarn.lock
+
+on:
+  schedule:
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+
+# A manual run racing the scheduled one would force push the same branch twice
+# and could open a duplicate pull request.
+concurrency:
+  group: update-wasm-yarn-lock
+
+jobs:
+  update-wasm-yarn-lock:
+    name: Update Wasm yarn.lock
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      LOCK_FILE: kotlin-js-store/wasm/yarn.lock
+      BRANCH: build/update-wasm-yarn-lock
+    steps:
+      # A GitHub App token is used instead of GITHUB_TOKEN because pull requests
+      # opened with GITHUB_TOKEN do not trigger the CI workflow.
+      - name: Generate token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.PR_BOT_APP_ID }}
+          private-key: ${{ secrets.PR_BOT_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Setup JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: "21"
+          distribution: "jetbrains"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6.3.0
+
+      # The JS target keeps its own lock file at kotlin-js-store/yarn.lock, which
+      # kotlinUpgradeYarnLock would rewrite, so only the Wasm task is run here.
+      - name: Upgrade Wasm yarn.lock
+        run: ./gradlew kotlinWasmUpgradeYarnLock
+
+      - name: Check for changes
+        id: check
+        run: |
+          if git diff --quiet -- "$LOCK_FILE"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request
+        if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+        run: |
+          set -euo pipefail
+
+          user_id="$(gh api "/users/${APP_SLUG}[bot]" --jq .id)"
+          git config user.name "${APP_SLUG}[bot]"
+          git config user.email "${user_id}+${APP_SLUG}[bot]@users.noreply.github.com"
+
+          git switch --create "$BRANCH"
+          # Staged by path so nothing the build left behind can ride along.
+          git add "$LOCK_FILE"
+          git commit --message "build(deps): update Wasm yarn.lock"
+          git push --force origin "$BRANCH"
+
+          if [ -z "$(gh pr list --head "$BRANCH" --state open --json number --jq '.[].number')" ]; then
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "build(deps): update Wasm yarn.lock" \
+              --body "\`kotlinWasmUpgradeYarnLock\` produced a different \`$LOCK_FILE\`, so this pull request brings the committed lock file back in sync with the npm dependencies the Wasm target resolves today. The JS lock file at \`kotlin-js-store/yarn.lock\` is left untouched."
+          fi
