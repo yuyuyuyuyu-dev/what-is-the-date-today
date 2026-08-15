@@ -3,7 +3,7 @@ package dev.yuyuyuyuyu.whatisthedatetoday
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
-import dev.yuyuyuyuyu.mymaterialtheme.MyMaterialTheme
+import dev.yuyuyuyuyu.mycomposables.MyMaterialTheme
 import dev.yuyuyuyuyu.whatisthedatetoday.di.createAppComponent
 import dev.yuyuyuyuyu.whatisthedatetoday.ui.main.MainScreen
 
