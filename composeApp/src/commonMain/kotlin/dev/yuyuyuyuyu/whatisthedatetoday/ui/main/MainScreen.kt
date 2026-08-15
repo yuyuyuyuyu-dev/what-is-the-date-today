@@ -1,52 +1,38 @@
 package dev.yuyuyuyuyu.whatisthedatetoday.ui.main
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.saveable.rememberSerializable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
-import dev.yuyuyuyuyu.simpleTopAppBar.SimpleTopAppBar
+import com.mikepenz.aboutlibraries.ui.compose.produceLibraries
+import dev.yuyuyuyuyu.mycomposables.MyScaffold
 import dev.yuyuyuyuyu.whatisthedatetoday.di.AppComponent
+import dev.yuyuyuyuyu.whatisthedatetoday.ui.whatIsTheDateToday.WhatIsTheDateTodayScreen
 import org.jetbrains.compose.resources.stringResource
 import whatisthedatetoday.composeapp.generated.resources.Res
 import whatisthedatetoday.composeapp.generated.resources.app_name
-import whatisthedatetoday.composeapp.generated.resources.open_source_licenses
 
 @Composable
 fun MainScreen(appComponent: AppComponent) {
-    val backStack: MutableList<MainNavigationRoute> =
-        rememberSerializable(serializer = SnapshotStateListSerializer()) {
-            mutableStateListOf(MainNavigationRoute.WhatIsTheDateToday)
-        }
-
     val uriHandler = LocalUriHandler.current
 
-    Scaffold(
-        topBar = {
-            SimpleTopAppBar(
-                title =
-                    when (backStack.lastOrNull()) {
-                        is MainNavigationRoute.OpenSourceLicenses ->
-                            stringResource(Res.string.open_source_licenses)
+    val libraries by produceLibraries {
+        Res.readBytes("files/aboutlibraries.json").decodeToString()
+    }
 
-                        else -> stringResource(Res.string.app_name)
-                    },
-                navigateBackIsPossible = backStack.size > 1,
-                onNavigateBackButtonClick = { backStack.removeLastOrNull() },
-                onOpenSourceLicensesButtonClick = {
-                    if (backStack.lastOrNull() != MainNavigationRoute.OpenSourceLicenses) {
-                        backStack.add(MainNavigationRoute.OpenSourceLicenses)
-                    }
-                },
-                onSourceCodeButtonClick = {
-                    uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/what-is-the-date-today")
-                },
-            )
+    MyScaffold(
+        title = stringResource(Res.string.app_name),
+        // A dependency shared by several targets is listed once per target, so the
+        // repeats are collapsed before the list is shown.
+        libraries = libraries?.let { libs -> libs.copy(libraries = libs.libraries.distinctBy { it.name }) },
+        onSourceCodeButtonClick = {
+            uriHandler.openUri("https://github.com/yuyuyuyuyu-dev/what-is-the-date-today")
         },
     ) { innerPadding ->
-        MainNavigation(backStack, appComponent, Modifier.padding(innerPadding))
+        WhatIsTheDateTodayScreen(
+            viewModel = appComponent.whatIsTheDateTodayViewModel,
+            modifier = Modifier.padding(innerPadding),
+        )
     }
 }
