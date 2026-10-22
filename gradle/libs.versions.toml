@@ -22,6 +22,7 @@ kotlinInject = "0.9.0"
 kotlinxCoroutines = "1.11.0"
 ksp = "2.3.12"
 ktlint = "14.2.0"
+ktlintCli = "1.8.0"
 material3 = "1.13.0-alpha01"
 myComposables = "0.1.1"
 versionCatalogUpdate = "1.1.1"
@@ -51,6 +52,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotl
 kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
+ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCli" }
 myComposables = { module = "dev.yuyuyuyuyu:my-composables", version.ref = "myComposables" }
 
 [plugins]

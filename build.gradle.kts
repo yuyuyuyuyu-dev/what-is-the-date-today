@@ -15,13 +15,14 @@ plugins {
     alias(libs.plugins.versionCatalogUpdate)
 }
 
+val ktlintVersion = libs.versions.ktlintCli.get()
+
 allprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "io.gitlab.arturbosch.detekt")
 
-    // ktlint (Kotlin) and Prettier (everything else) run at their defaults — the "Fit to
-    // Standard" stance: ktlint's style comes from .editorconfig, Prettier's from package.json.
     ktlint {
+        version = ktlintVersion
         val buildDirPath =
             layout.buildDirectory
                 .get()

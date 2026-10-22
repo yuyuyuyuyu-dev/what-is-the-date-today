@@ -103,6 +103,22 @@ dependencies {
 
 ksp { arg("me.tatarka.inject.dumpSetup", "true") }
 
+aboutLibraries {
+    export {
+        outputFile = file("src/commonMain/composeResources/files/aboutlibraries.json")
+    }
+}
+
+compose.resources {
+    customDirectory(
+        sourceSetName = "commonMain",
+        directoryProvider =
+            tasks
+                .named("exportLibraryDefinitions")
+                .map { layout.projectDirectory.dir("src/commonMain/composeResources") },
+    )
+}
+
 compose.desktop {
     application {
         mainClass = "dev.yuyuyuyuyu.whatisthedatetoday.MainKt"
