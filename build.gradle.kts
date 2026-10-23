@@ -8,36 +8,13 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.ktlint)
-    alias(libs.plugins.detekt)
+    alias(libs.plugins.detekt) apply false
     // Version-catalog linter/formatter (sorts libs.versions.toml, flags unused entries).
     // Applied to the root project only. Auto-update is intentionally left unused so it
     // does not compete with Dependabot; use the `versionCatalogFormat` task for linting.
     alias(libs.plugins.versionCatalogUpdate)
 }
 
-val ktlintVersion = libs.versions.ktlintCli.get()
-
-allprojects {
-    apply(plugin = "org.jlleitschuh.gradle.ktlint")
-    apply(plugin = "io.gitlab.arturbosch.detekt")
-
-    ktlint {
-        version = ktlintVersion
-        val buildDirPath =
-            layout.buildDirectory
-                .get()
-                .asFile.invariantSeparatorsPath
-        filter {
-            // Compose Multiplatform registers its generated resource accessors (under the
-            // build directory) as Kotlin source roots. That code is regenerated on every
-            // build and is not ours to format, so ktlint must skip everything under build/.
-            exclude { element -> element.file.invariantSeparatorsPath.startsWith(buildDirPath) }
-        }
-    }
-
-    detekt {
-        buildUponDefaultConfig = true
-        source.setFrom(files("src"))
-        config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
-    }
+ktlint {
+    version = libs.versions.ktlintCli.get()
 }

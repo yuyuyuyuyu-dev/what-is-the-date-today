@@ -10,6 +10,26 @@ plugins {
     alias(libs.plugins.aboutLibraries)
     alias(libs.plugins.ksp)
     alias(libs.plugins.composePwa)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
+}
+
+ktlint {
+    version = libs.versions.ktlintCli.get()
+    filter {
+        val buildPath =
+            layout.buildDirectory
+                .get()
+                .asFile
+                .toPath()
+        exclude { it.file.toPath().startsWith(buildPath) }
+    }
+}
+
+detekt {
+    source.setFrom("src")
+    buildUponDefaultConfig = true
+    config.setFrom(rootProject.files("config/detekt/detekt.yml"))
 }
 
 kotlin {
