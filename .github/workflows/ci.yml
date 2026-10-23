@@ -2,73 +2,30 @@ name: CI
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
   pull_request:
-    branches: ["main"]
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
 
 jobs:
-  ktlint:
-    name: Check Kotlin Formatting
-    runs-on: ubuntu-latest
+  oxfmt:
+    name: Oxfmt
     permissions:
       contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
+    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/oxfmt.yml@main
 
-      - name: Setup JDK
-        uses: actions/setup-java@v6
-        with:
-          java-version: "21"
-          distribution: "jetbrains"
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6.4.0
-
-      - name: Check Kotlin Formatting (ktlint)
-        run: ./gradlew ktlintCheck
-
-  prettier:
-    name: Check Formatting
-    runs-on: ubuntu-latest
+  kotlin-lint:
+    name: Kotlin lint
     permissions:
       contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup Node
-        uses: actions/setup-node@v7
-        with:
-          node-version: "22"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Check Formatting (Prettier)
-        run: npm run format:check
-
-  lint:
-    name: Run Linter
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup JDK
-        uses: actions/setup-java@v6
-        with:
-          java-version: "21"
-          distribution: "jetbrains"
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6.4.0
-
-      - name: Run Linter (detekt)
-        run: ./gradlew detekt
+    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/kotlin-lint.yml@main
+    with:
+      compose-multiplatform: true
 
   test:
     name: Run Tests
@@ -76,17 +33,15 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout
+      - name: Check out the repository
         uses: actions/checkout@v7
-
-      - name: Setup JDK
-        uses: actions/setup-java@v6
         with:
-          java-version: "21"
-          distribution: "jetbrains"
+          persist-credentials: false
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6.4.0
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
+        with:
+          compose-multiplatform: true
 
       - name: Run Tests
         run: ./gradlew wasmJsTest
@@ -97,22 +52,15 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout
+      - name: Check out the repository
         uses: actions/checkout@v7
-
-      - name: Setup JDK
-        uses: actions/setup-java@v6
         with:
-          java-version: "21"
-          distribution: "jetbrains"
+          persist-credentials: false
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6.4.0
-
-      # Mirror the deploy build so a broken production build is caught in CI,
-      # before it is merged to main, instead of failing at deploy time.
-      - name: Export Library Definitions
-        run: ./gradlew :composeApp:exportLibraryDefinitions -PaboutLibraries.exportPath=src/commonMain/composeResources/files/
+      - name: Set up the JDK and Gradle
+        uses: yuyuyuyuyu-dev/repo-config/.github/actions/setup-jdk-and-gradle@main
+        with:
+          compose-multiplatform: true
 
       - name: Build
         run: ./gradlew :composeApp:wasmJsBrowserDistribution

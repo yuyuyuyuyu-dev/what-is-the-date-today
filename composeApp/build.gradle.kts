@@ -10,6 +10,26 @@ plugins {
     alias(libs.plugins.aboutLibraries)
     alias(libs.plugins.ksp)
     alias(libs.plugins.composePwa)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.detekt)
+}
+
+ktlint {
+    version = libs.versions.ktlintCli.get()
+    filter {
+        val buildPath =
+            layout.buildDirectory
+                .get()
+                .asFile
+                .toPath()
+        exclude { it.file.toPath().startsWith(buildPath) }
+    }
+}
+
+detekt {
+    source.setFrom("src")
+    buildUponDefaultConfig = true
+    config.setFrom(rootProject.files("config/detekt/detekt.yml"))
 }
 
 kotlin {
@@ -67,18 +87,21 @@ kotlin {
 android {
     namespace = "dev.yuyuyuyuyu.whatisthedatetoday"
     compileSdk =
-        libs.versions.android.compileSdk
+        providers
+            .gradleProperty("sdk.compile")
             .get()
             .toInt()
 
     defaultConfig {
         applicationId = "dev.yuyuyuyuyu.whatisthedatetoday"
         minSdk =
-            libs.versions.android.minSdk
+            providers
+                .gradleProperty("sdk.min")
                 .get()
                 .toInt()
         targetSdk =
-            libs.versions.android.targetSdk
+            providers
+                .gradleProperty("sdk.target")
                 .get()
                 .toInt()
         versionCode = 1
@@ -102,6 +125,22 @@ dependencies {
 }
 
 ksp { arg("me.tatarka.inject.dumpSetup", "true") }
+
+aboutLibraries {
+    export {
+        outputFile = file("src/commonMain/composeResources/files/aboutlibraries.json")
+    }
+}
+
+compose.resources {
+    customDirectory(
+        sourceSetName = "commonMain",
+        directoryProvider =
+            tasks
+                .named("exportLibraryDefinitions")
+                .map { layout.projectDirectory.dir("src/commonMain/composeResources") },
+    )
+}
 
 compose.desktop {
     application {
