@@ -41,14 +41,3 @@ allprojects {
         config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
     }
 }
-
-// Use the catalog plugin as a pure formatter (sort + normalize), not a pruner.
-// versionCatalogFormat would otherwise delete version-only entries such as the
-// android-* SDK levels: they are referenced from build scripts via libs.versions.*
-// accessors, which the plugin's usage analysis cannot see. keepUnusedVersions guards them.
-// (Library/plugin entries are detected via dependency resolution, so they are safe.)
-versionCatalogUpdate {
-    keep {
-        keepUnusedVersions.set(true)
-    }
-}
