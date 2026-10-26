@@ -1,7 +1,4 @@
 root = true
 
 [*.{kt,kts}]
-# @Composable functions are intentionally PascalCase. Exempt only those from
-# ktlint's function-naming rule (detekt's FunctionNaming applies the same exemption);
-# every other function is still checked. Everything else follows ktlint defaults.
 ktlint_function_naming_ignore_when_annotated_with = Composable
