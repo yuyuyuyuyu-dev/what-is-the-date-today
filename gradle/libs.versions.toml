@@ -20,7 +20,7 @@ kotlinxCoroutines = "1.11.0"
 ksp = "2.3.12"
 ktlint = "14.2.0"
 ktlintCli = "1.8.0"
-material3 = "1.13.0-alpha01"
+material3 = "1.13.0-alpha02"
 myComposables = "0.1.1"
 versionCatalogUpdate = "1.1.1"
 
