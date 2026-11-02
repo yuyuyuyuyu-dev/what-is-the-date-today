@@ -1,7 +1,6 @@
 package dev.yuyuyuyuyu.whatisthedatetoday
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.test.ExperimentalTestApi
@@ -11,18 +10,20 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.v2.runComposeUiTest
 import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitStringResources
 import dev.yuyuyuyuyu.whatisthedatetoday.support.browserToday
-import dev.yuyuyuyuyu.whatisthedatetoday.support.fixBrowserClockAt
-import dev.yuyuyuyuyu.whatisthedatetoday.support.restoreBrowser
+import dev.yuyuyuyuyu.whatisthedatetoday.support.restoreBrowserLanguage
 import dev.yuyuyuyuyu.whatisthedatetoday.support.setBrowserLanguage
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import kotlin.test.AfterTest
 import kotlin.test.Test
+import kotlin.time.Clock
 
 @OptIn(ExperimentalTestApi::class)
 class DateDisplayTest {
     @AfterTest
     fun tearDown() {
-        restoreBrowser()
+        restoreBrowserLanguage()
     }
 
     @Test
@@ -86,16 +87,19 @@ class DateDisplayTest {
         vararg expectations: Pair<LocalDateTime, String>,
         language: String? = null,
     ) = runComposeUiTest {
-        var current by mutableStateOf(expectations.first())
+        var clock by mutableStateOf(clockAt(expectations.first().first))
         language?.let(::setBrowserLanguage)
-        fixBrowserClockAt(current.first)
-        setContent { key(current) { App() } }
+        setContent { App(clock) }
 
         expectations.forEach { expectation ->
-            fixBrowserClockAt(expectation.first)
-            current = expectation
+            clock = clockAt(expectation.first)
             awaitStringResources()
             onNodeWithText(expectation.second).assertIsDisplayed()
         }
     }
+
+    private fun clockAt(localDateTime: LocalDateTime) =
+        object : Clock {
+            override fun now() = localDateTime.toInstant(TimeZone.currentSystemDefault())
+        }
 }

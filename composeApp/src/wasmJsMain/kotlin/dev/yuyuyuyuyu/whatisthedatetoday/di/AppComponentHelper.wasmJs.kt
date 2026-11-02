@@ -1,3 +1,5 @@
 package dev.yuyuyuyuyu.whatisthedatetoday.di
 
-actual fun createAppComponent(): AppComponent = AppComponent::class.create()
+import kotlin.time.Clock
+
+actual fun createAppComponent(clock: Clock): AppComponent = AppComponent::class.create(clock)

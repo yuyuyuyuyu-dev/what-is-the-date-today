@@ -3,27 +3,7 @@
 
 package dev.yuyuyuyuyu.whatisthedatetoday.support
 
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.number
 import kotlin.js.ExperimentalWasmJsInterop
-import kotlin.js.JsAny
-
-private const val NANOSECONDS_PER_MILLISECOND = 1_000_000
-
-private val realDate: JsAny = currentDateClass()
-
-fun fixBrowserClockAt(localDateTime: LocalDateTime) {
-    installFixedDate(
-        real = realDate,
-        year = localDateTime.year,
-        monthIndex = localDateTime.month.number - 1,
-        day = localDateTime.day,
-        hour = localDateTime.hour,
-        minute = localDateTime.minute,
-        second = localDateTime.second,
-        millisecond = localDateTime.nanosecond / NANOSECONDS_PER_MILLISECOND,
-    )
-}
 
 fun setBrowserLanguage(language: String): Unit =
     js(
@@ -33,11 +13,6 @@ fun setBrowserLanguage(language: String): Unit =
         window.dispatchEvent(new Event('languagechange'));
     }""",
     )
-
-fun restoreBrowser() {
-    restoreDate(realDate)
-    restoreNavigatorLanguage()
-}
 
 fun browserToday(): String =
     js(
@@ -49,36 +24,7 @@ fun browserToday(): String =
     })()""",
     )
 
-private fun currentDateClass(): JsAny = js("Date")
-
-@Suppress("LongParameterList")
-private fun installFixedDate(
-    real: JsAny,
-    year: Int,
-    monthIndex: Int,
-    day: Int,
-    hour: Int,
-    minute: Int,
-    second: Int,
-    millisecond: Int,
-): Unit =
-    js(
-        """{
-        const fixedTime = new real(year, monthIndex, day, hour, minute, second, millisecond).getTime();
-        globalThis.Date = class extends real {
-            constructor(...args) {
-                super(...(args.length === 0 ? [fixedTime] : args));
-            }
-            static now() {
-                return fixedTime;
-            }
-        };
-    }""",
-    )
-
-private fun restoreDate(real: JsAny): Unit = js("{ globalThis.Date = real; }")
-
-private fun restoreNavigatorLanguage(): Unit =
+fun restoreBrowserLanguage(): Unit =
     js(
         """{
         delete navigator.languages;
