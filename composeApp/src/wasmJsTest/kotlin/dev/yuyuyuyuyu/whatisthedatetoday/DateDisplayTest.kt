@@ -4,16 +4,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitDisplayed
-import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitDisplayedContaining
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.v2.runComposeUiTest
+import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitStringResources
 import dev.yuyuyuyuyu.whatisthedatetoday.support.browserToday
 import dev.yuyuyuyuyu.whatisthedatetoday.support.fixBrowserClockAt
-import dev.yuyuyuyuyu.whatisthedatetoday.support.runAppTest
+import dev.yuyuyuyuyu.whatisthedatetoday.support.restoreBrowser
 import dev.yuyuyuyuyu.whatisthedatetoday.support.setBrowserLanguage
 import kotlinx.datetime.LocalDateTime
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
+@OptIn(ExperimentalTestApi::class)
 class DateDisplayTest {
+    @AfterTest
+    fun tearDown() {
+        restoreBrowser()
+    }
+
     @Test
     fun `shows every weekday in Japanese`() =
         assertAppShows(
@@ -66,19 +77,20 @@ class DateDisplayTest {
 
     @Test
     fun `reads the real clock of the browser`() =
-        runAppTest {
+        runComposeUiTest {
             setBrowserLanguage("en-US")
             val before = browserToday()
 
             setContent { App() }
+            awaitStringResources()
 
-            awaitDisplayedContaining(before, browserToday())
+            onNode(hasText(before, substring = true) or hasText(browserToday(), substring = true)).assertIsDisplayed()
         }
 
     private fun assertAppShows(
         language: String,
         vararg expectations: Pair<LocalDateTime, String>,
-    ) = runAppTest {
+    ) = runComposeUiTest {
         var current by mutableStateOf(expectations.first())
         setBrowserLanguage(language)
         fixBrowserClockAt(current.first)
@@ -87,7 +99,8 @@ class DateDisplayTest {
         expectations.forEach { expectation ->
             fixBrowserClockAt(expectation.first)
             current = expectation
-            awaitDisplayed(expectation.second)
+            awaitStringResources()
+            onNodeWithText(expectation.second).assertIsDisplayed()
         }
     }
 }
