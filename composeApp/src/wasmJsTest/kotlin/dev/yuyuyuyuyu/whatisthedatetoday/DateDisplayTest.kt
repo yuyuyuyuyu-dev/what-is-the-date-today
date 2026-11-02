@@ -15,7 +15,7 @@ import kotlin.test.Test
 
 class DateDisplayTest {
     @Test
-    fun showsEveryWeekdayInJapanese() =
+    fun `shows every weekday in Japanese`() =
         assertAppShows(
             "ja",
             LocalDateTime(2023, 6, 19, 12, 0) to "（令和5年）2023年06月19日\n月曜日",
@@ -28,7 +28,7 @@ class DateDisplayTest {
         )
 
     @Test
-    fun showsEveryWeekdayInEnglish() =
+    fun `shows every weekday in English`() =
         assertAppShows(
             "en-US",
             LocalDateTime(2023, 6, 19, 12, 0) to "(Reiwa 5) 2023/06/19\nMonday",
@@ -41,7 +41,7 @@ class DateDisplayTest {
         )
 
     @Test
-    fun padsSingleDigitMonthsAndDaysButNotDoubleDigitOnes() =
+    fun `pads single digit months and days but not double digit ones`() =
         assertAppShows(
             "en-US",
             LocalDateTime(2023, 1, 3, 12, 0) to "(Reiwa 5) 2023/01/03\nTuesday",
@@ -49,7 +49,7 @@ class DateDisplayTest {
         )
 
     @Test
-    fun countsReiwaYearsFromItsFirstDay() =
+    fun `counts Reiwa years from its first day`() =
         assertAppShows(
             "en-US",
             LocalDateTime(2019, 5, 1, 12, 0) to "(Reiwa 1) 2019/05/01\nWednesday",
@@ -57,7 +57,7 @@ class DateDisplayTest {
         )
 
     @Test
-    fun changesTheDateAtLocalMidnight() =
+    fun `changes the date at local midnight`() =
         assertAppShows(
             "en-US",
             LocalDateTime(2023, 6, 21, 23, 59, 59, 999_000_000) to "(Reiwa 5) 2023/06/21\nWednesday",
@@ -65,7 +65,7 @@ class DateDisplayTest {
         )
 
     @Test
-    fun readsTheRealClockOfTheBrowser() =
+    fun `reads the real clock of the browser`() =
         runAppTest {
             setBrowserLanguage("en-US")
             val before = browserToday()
