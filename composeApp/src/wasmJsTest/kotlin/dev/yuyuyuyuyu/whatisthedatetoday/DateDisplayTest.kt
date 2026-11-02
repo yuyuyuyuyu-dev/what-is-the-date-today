@@ -1,0 +1,93 @@
+package dev.yuyuyuyuyu.whatisthedatetoday
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitDisplayed
+import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitDisplayedContaining
+import dev.yuyuyuyuyu.whatisthedatetoday.support.browserToday
+import dev.yuyuyuyuyu.whatisthedatetoday.support.fixBrowserClockAt
+import dev.yuyuyuyuyu.whatisthedatetoday.support.runAppTest
+import dev.yuyuyuyuyu.whatisthedatetoday.support.setBrowserLanguage
+import kotlinx.datetime.LocalDateTime
+import kotlin.test.Test
+
+class DateDisplayTest {
+    @Test
+    fun showsEveryWeekdayInJapanese() =
+        assertAppShows(
+            "ja",
+            LocalDateTime(2023, 6, 19, 12, 0) to "（令和5年）2023年06月19日\n月曜日",
+            LocalDateTime(2023, 6, 20, 12, 0) to "（令和5年）2023年06月20日\n火曜日",
+            LocalDateTime(2023, 6, 21, 12, 0) to "（令和5年）2023年06月21日\n水曜日",
+            LocalDateTime(2023, 6, 22, 12, 0) to "（令和5年）2023年06月22日\n木曜日",
+            LocalDateTime(2023, 6, 23, 12, 0) to "（令和5年）2023年06月23日\n金曜日",
+            LocalDateTime(2023, 6, 24, 12, 0) to "（令和5年）2023年06月24日\n土曜日",
+            LocalDateTime(2023, 6, 25, 12, 0) to "（令和5年）2023年06月25日\n日曜日",
+        )
+
+    @Test
+    fun showsEveryWeekdayInEnglish() =
+        assertAppShows(
+            "en-US",
+            LocalDateTime(2023, 6, 19, 12, 0) to "(Reiwa 5) 2023/06/19\nMonday",
+            LocalDateTime(2023, 6, 20, 12, 0) to "(Reiwa 5) 2023/06/20\nTuesday",
+            LocalDateTime(2023, 6, 21, 12, 0) to "(Reiwa 5) 2023/06/21\nWednesday",
+            LocalDateTime(2023, 6, 22, 12, 0) to "(Reiwa 5) 2023/06/22\nThursday",
+            LocalDateTime(2023, 6, 23, 12, 0) to "(Reiwa 5) 2023/06/23\nFriday",
+            LocalDateTime(2023, 6, 24, 12, 0) to "(Reiwa 5) 2023/06/24\nSaturday",
+            LocalDateTime(2023, 6, 25, 12, 0) to "(Reiwa 5) 2023/06/25\nSunday",
+        )
+
+    @Test
+    fun padsSingleDigitMonthsAndDaysButNotDoubleDigitOnes() =
+        assertAppShows(
+            "en-US",
+            LocalDateTime(2023, 1, 3, 12, 0) to "(Reiwa 5) 2023/01/03\nTuesday",
+            LocalDateTime(2023, 12, 31, 12, 0) to "(Reiwa 5) 2023/12/31\nSunday",
+        )
+
+    @Test
+    fun countsReiwaYearsFromItsFirstDay() =
+        assertAppShows(
+            "en-US",
+            LocalDateTime(2019, 5, 1, 12, 0) to "(Reiwa 1) 2019/05/01\nWednesday",
+            LocalDateTime(2020, 1, 1, 12, 0) to "(Reiwa 2) 2020/01/01\nWednesday",
+        )
+
+    @Test
+    fun changesTheDateAtLocalMidnight() =
+        assertAppShows(
+            "en-US",
+            LocalDateTime(2023, 6, 21, 23, 59, 59, 999_000_000) to "(Reiwa 5) 2023/06/21\nWednesday",
+            LocalDateTime(2023, 6, 22, 0, 0) to "(Reiwa 5) 2023/06/22\nThursday",
+        )
+
+    @Test
+    fun readsTheRealClockOfTheBrowser() =
+        runAppTest {
+            setBrowserLanguage("en-US")
+            val before = browserToday()
+
+            setContent { App() }
+
+            awaitDisplayedContaining(before, browserToday())
+        }
+
+    private fun assertAppShows(
+        language: String,
+        vararg expectations: Pair<LocalDateTime, String>,
+    ) = runAppTest {
+        var current by mutableStateOf(expectations.first())
+        setBrowserLanguage(language)
+        fixBrowserClockAt(current.first)
+        setContent { key(current) { App() } }
+
+        expectations.forEach { expectation ->
+            fixBrowserClockAt(expectation.first)
+            current = expectation
+            awaitDisplayed(expectation.second)
+        }
+    }
+}
