@@ -7,4 +7,10 @@ config.files.push({
   watched: false,
 });
 config.proxies["/composeResources/"] = `/absolute${composeResources}/`;
+config.files.unshift({
+  pattern: `${config.basePath}/kotlin/browser-language.js`,
+  included: true,
+  served: true,
+  watched: false,
+});
 config.client.mocha = { ...config.client.mocha, timeout: 30000 };

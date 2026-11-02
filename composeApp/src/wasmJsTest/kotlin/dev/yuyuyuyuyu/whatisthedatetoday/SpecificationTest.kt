@@ -7,7 +7,6 @@ import androidx.compose.ui.test.v2.runComposeUiTest
 import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitStringResources
 import dev.yuyuyuyuyu.whatisthedatetoday.support.fixBrowserClockAt
 import dev.yuyuyuyuyu.whatisthedatetoday.support.restoreBrowser
-import dev.yuyuyuyuyu.whatisthedatetoday.support.setBrowserLanguage
 import kotlinx.datetime.LocalDateTime
 import kotlin.test.AfterTest
 import kotlin.test.Test
@@ -20,26 +19,10 @@ class SpecificationTest {
     }
 
     @Test
-    fun `should show the date in Japanese when the browser language is Japanese`() =
+    fun `should show the current date`() =
         runComposeUiTest {
             // Arrange
             fixBrowserClockAt(LocalDateTime(2023, 6, 22, 0, 0))
-            setBrowserLanguage("ja")
-
-            // Act
-            setContent { App() }
-            awaitStringResources()
-
-            // Assert
-            onNodeWithText("（令和5年）2023年06月22日\n木曜日").assertIsDisplayed()
-        }
-
-    @Test
-    fun `should show the date in English when the browser language is English`() =
-        runComposeUiTest {
-            // Arrange
-            fixBrowserClockAt(LocalDateTime(2023, 6, 22, 0, 0))
-            setBrowserLanguage("en-US")
 
             // Act
             setContent { App() }

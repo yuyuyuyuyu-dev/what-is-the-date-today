@@ -28,7 +28,6 @@ class DateDisplayTest {
     @Test
     fun `shows every weekday in Japanese`() =
         assertAppShows(
-            "ja",
             LocalDateTime(2023, 6, 19, 12, 0) to "（令和5年）2023年06月19日\n月曜日",
             LocalDateTime(2023, 6, 20, 12, 0) to "（令和5年）2023年06月20日\n火曜日",
             LocalDateTime(2023, 6, 21, 12, 0) to "（令和5年）2023年06月21日\n水曜日",
@@ -36,12 +35,12 @@ class DateDisplayTest {
             LocalDateTime(2023, 6, 23, 12, 0) to "（令和5年）2023年06月23日\n金曜日",
             LocalDateTime(2023, 6, 24, 12, 0) to "（令和5年）2023年06月24日\n土曜日",
             LocalDateTime(2023, 6, 25, 12, 0) to "（令和5年）2023年06月25日\n日曜日",
+            language = "ja",
         )
 
     @Test
     fun `shows every weekday in English`() =
         assertAppShows(
-            "en-US",
             LocalDateTime(2023, 6, 19, 12, 0) to "(Reiwa 5) 2023/06/19\nMonday",
             LocalDateTime(2023, 6, 20, 12, 0) to "(Reiwa 5) 2023/06/20\nTuesday",
             LocalDateTime(2023, 6, 21, 12, 0) to "(Reiwa 5) 2023/06/21\nWednesday",
@@ -54,7 +53,6 @@ class DateDisplayTest {
     @Test
     fun `pads single digit months and days but not double digit ones`() =
         assertAppShows(
-            "en-US",
             LocalDateTime(2023, 1, 3, 12, 0) to "(Reiwa 5) 2023/01/03\nTuesday",
             LocalDateTime(2023, 12, 31, 12, 0) to "(Reiwa 5) 2023/12/31\nSunday",
         )
@@ -62,7 +60,6 @@ class DateDisplayTest {
     @Test
     fun `counts Reiwa years from its first day`() =
         assertAppShows(
-            "en-US",
             LocalDateTime(2019, 5, 1, 12, 0) to "(Reiwa 1) 2019/05/01\nWednesday",
             LocalDateTime(2020, 1, 1, 12, 0) to "(Reiwa 2) 2020/01/01\nWednesday",
         )
@@ -70,7 +67,6 @@ class DateDisplayTest {
     @Test
     fun `changes the date at local midnight`() =
         assertAppShows(
-            "en-US",
             LocalDateTime(2023, 6, 21, 23, 59, 59, 999_000_000) to "(Reiwa 5) 2023/06/21\nWednesday",
             LocalDateTime(2023, 6, 22, 0, 0) to "(Reiwa 5) 2023/06/22\nThursday",
         )
@@ -78,7 +74,6 @@ class DateDisplayTest {
     @Test
     fun `reads the real clock of the browser`() =
         runComposeUiTest {
-            setBrowserLanguage("en-US")
             val before = browserToday()
 
             setContent { App() }
@@ -88,11 +83,11 @@ class DateDisplayTest {
         }
 
     private fun assertAppShows(
-        language: String,
         vararg expectations: Pair<LocalDateTime, String>,
+        language: String? = null,
     ) = runComposeUiTest {
         var current by mutableStateOf(expectations.first())
-        setBrowserLanguage(language)
+        language?.let(::setBrowserLanguage)
         fixBrowserClockAt(current.first)
         setContent { key(current) { App() } }
 
