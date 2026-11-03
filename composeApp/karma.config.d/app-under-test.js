@@ -13,5 +13,4 @@ config.files.unshift({
   served: true,
   watched: false,
 });
-process.env.TZ = "Asia/Tokyo";
 config.client.mocha = { ...config.client.mocha, timeout: 30000 };
