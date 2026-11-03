@@ -1,22 +1,18 @@
 package dev.yuyuyuyuyu.whatisthedatetoday
 
 import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.v2.runComposeUiTest
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.awaitPendingResourceStateLoads
 import kotlin.test.Test
 import kotlin.time.Clock
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.TimeSource
 
-@OptIn(ExperimentalTestApi::class)
+@OptIn(ExperimentalTestApi::class, ExperimentalResourceApi::class)
 class SpecificationTest {
     @Test
     fun `should show the current date`() =
@@ -29,27 +25,9 @@ class SpecificationTest {
 
             // Act
             setContent { App(clock) }
+            awaitPendingResourceStateLoads()
 
             // Assert
-            onNodeWithText("(Reiwa 5) 2023/06/22\nThursday").awaitUntilDisplayed()
+            onNodeWithText("(Reiwa 5) 2023/06/22\nThursday").assertIsDisplayed()
         }
-}
-
-private suspend fun SemanticsNodeInteraction.awaitUntilDisplayed(timeoutMillis: Long = 1_000) =
-    awaitUntil(timeoutMillis) { assertIsDisplayed() }
-
-private suspend fun awaitUntil(
-    timeoutMillis: Long = 1_000,
-    assertion: () -> Unit,
-) {
-    val deadline = TimeSource.Monotonic.markNow() + timeoutMillis.milliseconds
-    while (true) {
-        try {
-            assertion()
-            return
-        } catch (error: AssertionError) {
-            if (deadline.hasPassedNow()) throw error
-            withContext(Dispatchers.Default) { delay(20.milliseconds) }
-        }
-    }
 }

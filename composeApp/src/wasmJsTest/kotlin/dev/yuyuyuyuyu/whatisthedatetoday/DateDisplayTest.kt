@@ -8,18 +8,19 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.v2.runComposeUiTest
-import dev.yuyuyuyuyu.whatisthedatetoday.support.awaitStringResources
 import dev.yuyuyuyuyu.whatisthedatetoday.support.browserToday
 import dev.yuyuyuyuyu.whatisthedatetoday.support.restoreBrowserLanguage
 import dev.yuyuyuyuyu.whatisthedatetoday.support.setBrowserLanguage
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toInstant
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.awaitPendingResourceStateLoads
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.time.Clock
 
-@OptIn(ExperimentalTestApi::class)
+@OptIn(ExperimentalTestApi::class, ExperimentalResourceApi::class)
 class DateDisplayTest {
     @AfterTest
     fun tearDown() {
@@ -78,7 +79,7 @@ class DateDisplayTest {
             val before = browserToday()
 
             setContent { App() }
-            awaitStringResources()
+            awaitPendingResourceStateLoads()
 
             onNode(hasText(before, substring = true) or hasText(browserToday(), substring = true)).assertIsDisplayed()
         }
@@ -93,7 +94,8 @@ class DateDisplayTest {
 
         expectations.forEach { expectation ->
             clock = clockAt(expectation.first)
-            awaitStringResources()
+            waitForIdle()
+            awaitPendingResourceStateLoads()
             onNodeWithText(expectation.second).assertIsDisplayed()
         }
     }
