@@ -35,11 +35,17 @@ class SpecificationTest {
         }
 }
 
-private suspend fun SemanticsNodeInteraction.awaitUntilDisplayed(timeoutMillis: Long = 1_000) {
+private suspend fun SemanticsNodeInteraction.awaitUntilDisplayed(timeoutMillis: Long = 1_000) =
+    awaitUntil(timeoutMillis) { assertIsDisplayed() }
+
+private suspend fun awaitUntil(
+    timeoutMillis: Long = 1_000,
+    assertion: () -> Unit,
+) {
     val deadline = TimeSource.Monotonic.markNow() + timeoutMillis.milliseconds
     while (true) {
         try {
-            assertIsDisplayed()
+            assertion()
             return
         } catch (error: AssertionError) {
             if (deadline.hasPassedNow()) throw error
