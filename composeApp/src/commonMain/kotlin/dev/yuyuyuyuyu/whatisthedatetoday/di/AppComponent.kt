@@ -8,9 +8,12 @@ import dev.yuyuyuyuyu.whatisthedatetoday.ui.whatIsTheDateToday.WhatIsTheDateToda
 import dev.yuyuyuyuyu.whatisthedatetoday.ui.whatIsTheDateToday.WhatIsTheDateTodayViewModelImpl
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.Provides
+import kotlin.time.Clock
 
 @Component
-abstract class AppComponent {
+abstract class AppComponent(
+    @get:Provides val clock: Clock,
+) {
     abstract val whatIsTheDateTodayViewModel: WhatIsTheDateTodayViewModel
 
     @Provides
