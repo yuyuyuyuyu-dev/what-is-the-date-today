@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.TimeZone
+import kotlinx.datetime.UtcOffset
 import kotlinx.datetime.toInstant
 import kotlin.test.Test
 import kotlin.time.Clock
@@ -24,7 +24,7 @@ class SpecificationTest {
             // Arrange
             val clock =
                 object : Clock {
-                    override fun now() = LocalDateTime(2023, 6, 22, 0, 0).toInstant(TimeZone.currentSystemDefault())
+                    override fun now() = LocalDateTime(2023, 6, 22, 0, 0).toInstant(UtcOffset(hours = 9))
                 }
 
             // Act
