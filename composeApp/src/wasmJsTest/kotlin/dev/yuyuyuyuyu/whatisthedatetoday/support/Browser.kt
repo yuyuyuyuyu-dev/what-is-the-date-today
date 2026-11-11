@@ -32,3 +32,7 @@ fun restoreBrowserLanguage(): Unit =
         window.dispatchEvent(new Event('languagechange'));
     }""",
     )
+
+fun documentLanguage(): String = js("document.documentElement.lang")
+
+fun removeDocumentLanguage(): Unit = js("document.documentElement.removeAttribute('lang')")
