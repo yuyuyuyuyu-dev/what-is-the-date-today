@@ -2,9 +2,12 @@
 	"name": "what-is-the-date-today",
 	"private": true,
 	"scripts": {
-		"biome": "biome"
+		"biome": "biome",
+		"playwright": "playwright"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.6.6"
+		"@biomejs/biome": "2.6.6",
+		"@playwright/test": "1.65.0",
+		"http-server": "14.1.1"
 	}
 }
