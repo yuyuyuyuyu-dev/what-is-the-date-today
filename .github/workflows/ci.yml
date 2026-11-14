@@ -13,11 +13,11 @@ concurrency:
 permissions: {}
 
 jobs:
-  oxfmt:
-    name: Oxfmt
+  biome:
+    name: Biome
     permissions:
       contents: read
-    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/oxfmt.yml@main
+    uses: yuyuyuyuyu-dev/repo-config/.github/workflows/biome.yml@main
 
   kotlin-lint:
     name: Kotlin lint
@@ -64,3 +64,15 @@ jobs:
 
       - name: Build
         run: ./gradlew :composeApp:wasmJsBrowserDistribution
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Install Playwright
+        run: npm ci
+
+      - name: Run the browser tests
+        run: npm run playwright -- test
