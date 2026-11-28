@@ -9,7 +9,7 @@ const source = await readFile(new URL("icons/icon.svg", resources), "utf8");
 
 const appIconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
 const faviconSizes = [16, 24, 32, 48, 64];
-const faviconViewBox = "86 80 340 340";
+const faviconViewBox = "66 60 380 380";
 const faviconCornerRadius = "22%";
 
 const browser = await chromium.launch();
