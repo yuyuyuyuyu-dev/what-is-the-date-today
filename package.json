@@ -3,6 +3,7 @@
 	"private": true,
 	"scripts": {
 		"biome": "biome",
+		"icons": "node scripts/generate-icons.mjs",
 		"playwright": "playwright"
 	},
 	"devDependencies": {
