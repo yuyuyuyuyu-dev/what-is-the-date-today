@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>What is the date today</title>
+  <rect width="512" height="512" fill="#E8572A"/>
+  <rect x="116" y="136" width="280" height="264" rx="40" fill="#FFFFFF"/>
+  <path d="M116 176a40 40 0 0 1 40-40h200a40 40 0 0 1 40 40v34H116z" fill="#3B2418"/>
+  <rect x="172" y="100" width="28" height="68" rx="14" fill="#FFFFFF"/>
+  <rect x="312" y="100" width="28" height="68" rx="14" fill="#FFFFFF"/>
+  <g fill="#E9DDD5">
+    <circle cx="178" cy="256" r="14"/>
+    <circle cx="230" cy="256" r="14"/>
+    <circle cx="282" cy="256" r="14"/>
+    <circle cx="334" cy="256" r="14"/>
+    <circle cx="178" cy="308" r="14"/>
+    <circle cx="230" cy="308" r="14"/>
+    <circle cx="334" cy="308" r="14"/>
+    <circle cx="178" cy="360" r="14"/>
+    <circle cx="230" cy="360" r="14"/>
+    <circle cx="282" cy="360" r="14"/>
+    <circle cx="334" cy="360" r="14"/>
+  </g>
+  <circle cx="282" cy="308" r="24" fill="#E8572A"/>
+</svg>
